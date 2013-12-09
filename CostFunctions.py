@@ -19,11 +19,10 @@ def CostF(theta,lam , X, y):
 	thetat = theta.transpose() #thetat is a (1,m) vector
 	for i in range(0,m):
 		Xit = X[i, :].transpose() #Xit is (n,1) vector
+		print np.shape(Xit)
+		print np.shape(thetat)
+		print(np.dot(thetat,Xit))
 		if y[i]==1:
-			print thetat
-			print Xit
-			print(np.dot(thetat,Xit))
-
 			J = J + 1.0/ m * ( -y[i] * np.log(sigmoid(np.dot(thetat,Xit))))
 		else:
 			J = J + 1.0/ m * (-(1 - y[i]) * np.log(1-sigmoid(np.dot(thetat,Xit))))
