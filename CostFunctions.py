@@ -13,21 +13,21 @@ def CostF(theta,lam , X, y):
 	#theta is a (n,1) vector
 	#X is a (m,n) matrix
 	#y is a (m,1) vector
+	if theta.ndim==1:
+		theta = np.array([theta]).transpose()
+
 	m = np.shape(y)[0]
 	n = np.shape(theta)[0]
 	J = 0.0
 	thetat = theta.transpose() #thetat is a (1,m) vector
 	for i in range(0,m):
-		Xit = X[i, :].transpose() #Xit is (n,1) vector
-		print np.shape(Xit)
-		print np.shape(thetat)
-		print(np.dot(thetat,Xit))
+		Xit = np.array([X[i, :]]).transpose() #Xit is (n,1) vector
 		if y[i]==1:
-			J = J + 1.0/ m * ( -y[i] * np.log(sigmoid(np.dot(thetat,Xit))))
+			J = J + 1.0/ m * ( -y[i][0] * np.log(float(sigmoid(np.dot(thetat,Xit)))))
 		else:
-			J = J + 1.0/ m * (-(1 - y[i]) * np.log(1-sigmoid(np.dot(thetat,Xit))))
+			J = J + 1.0/ m * (-(1 - y[i][0]) * np.log(1-float(sigmoid(np.dot(thetat,Xit)))))
 	for j in range(1, n):
-		J = J + lam / (2*m) *theta[j]**2
+		J = J + lam / (2*m) *theta[j][0]**2
 	print J
 	return J
 
@@ -35,16 +35,19 @@ def GradF(theta,lam, X, y):
 	#theta is a (n,1) vector
 	#X is a (m,n) matrix
 	#y is a (m,1) vector
+	if theta.ndim==1:
+		theta = np.array([theta]).transpose()
+
 	m = np.shape(y)[0]
 	n = np.shape(theta)[0]
-	grad = np.zeros(np.shape(theta))
+	grad = np.zeros((n,))
 	thetat = theta.transpose() #thetat is a (1,m) vector
 	for j in range(0, n):
 		for i in range(0, m):
-			if (j!=0):
-				grad[j] = grad[j] + lam/(2*m)*theta[j]**2
-			Xit = X[i, :].transpose() #Xit is (n,1) vector
-			grad[j] = grad[j] + 1.0 / m * (sigmoid(np.dot(thetat,Xit))-y[i])* X[i,j]
+			Xit = np.array([X[i, :]]).transpose() #Xit is (n,1) vector
+			grad[j] = grad[j] + 1.0 / m * (float(sigmoid(np.dot(thetat,Xit)))-y[i][0])* X[i,j]
+	for j in range(1, n):
+		grad[j] = grad[j] + lam / m * theta[j][0]
 
 	return grad
 
