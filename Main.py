@@ -42,7 +42,7 @@ X = mapFeature(data[:,0],data[:,1],6)
 
 [m, n] = np.shape(X)
 initial_theta  = np.zeros((n, 1))
-lam = 0.0
+lam = 1.0
 
 #result_opt = optimize.fmin_cg((lambda theta: costReg(lam,theta,X,y)) , initial_theta,(lambda theta: gradReg(lam,theta,X,y)), maxiter = 10)
 #result_opt = optimize.fmin_bfgs((lambda theta: costReg(lam,np.mat(theta).transpose(),X,y)) , np.array(initial_theta),(lambda theta: gradReg(lam,np.mat(theta).transpose(),X,y)), maxiter = 10)
