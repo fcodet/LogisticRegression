@@ -12,7 +12,7 @@ print('loading data...')
 data = loadcsv('ex2data2.txt') #data is an array (m,n-1)
 print('data loaded.')
 col1 = np.array([data[:,0]]).transpose()
-col2 = np.array([data[:,0]]).transpose()
+col2 = np.array([data[:,1]]).transpose()
 
 vX = np.concatenate((col1, col2), 1)
 vy = np.array([data[:, 2]]).transpose()
