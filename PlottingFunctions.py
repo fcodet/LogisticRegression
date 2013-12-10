@@ -36,3 +36,19 @@ def MultiScatter(sets):
 		ax.scatter(map(lambda xx: float(xx), set[0]),map(lambda xx: float(xx), set[1]),marker = set[2], label = legendinfo, c= set[4])
 	ax.legend(legendinfo)
 	plt.show()
+
+def MultiScatter3D(sets):
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    legendinfo = []
+    colorinfo = []
+    for set in sets:
+        if len(set)>=4:
+            legendinfo.append(set[3])
+        else:
+            legendinfo.append('')
+        #ax.scatter(map(lambda xx: float(xx), set[0]),map(lambda xx: float(xx), set[1]),marker = set[2], label = legendinfo)
+        ax.scatter(map(lambda xx: float(xx), set[0]),map(lambda xx: float(xx), set[1]),map(lambda xx: float(xx), set[2]),marker = set[3], label = legendinfo, c= set[5])
+    ax.legend(legendinfo)
+    plt.show()
