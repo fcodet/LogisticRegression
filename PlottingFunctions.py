@@ -26,11 +26,13 @@ def MultiPlot(t, lines):
 def MultiScatter(sets):
 	ax = plt.axes()
 	legendinfo = []
+	colorinfo = []
 	for set in sets:
 		if len(set)>=4:
 			legendinfo.append(set[3])
 		else:
 			legendinfo.append('')
-		ax.scatter(map(lambda xx: float(xx), set[0]),map(lambda xx: float(xx), set[1]),marker = set[2], label = legendinfo)
+		#ax.scatter(map(lambda xx: float(xx), set[0]),map(lambda xx: float(xx), set[1]),marker = set[2], label = legendinfo)
+		ax.scatter(map(lambda xx: float(xx), set[0]),map(lambda xx: float(xx), set[1]),marker = set[2], label = legendinfo, c= set[4])
 	ax.legend(legendinfo)
 	plt.show()
